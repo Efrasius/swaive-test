@@ -1,0 +1,14 @@
+body {
+  background-color: #23252C;
+  place-items: initial;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+
+}
+
+
