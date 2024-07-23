@@ -25,10 +25,12 @@ function App() {
   const [genres, setGenres] = useState<Array<GenreInterface> | null>(null);
   const [error, setError] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const res = await axios.get('https://api.themoviedb.org/3/movie/popular?api_key=307988eac06dc5f8a31e00a98636b0d9');
         setMoviesList(res.data.results);
 
@@ -38,6 +40,9 @@ function App() {
       catch (error) {
         //console.error(error);
         setError(true);
+      }
+      finally {
+        setLoading(false);
       }
     }
 
@@ -59,12 +64,12 @@ function App() {
     <>
       <GlobalStyle />
       <Header />
-      <SearchBar setMoviesList={setMoviesList} setError={setError} setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
-      <StyledGallery>
+      <SearchBar setMoviesList={setMoviesList} setError={setError} setSearchQuery={setSearchQuery} searchQuery={searchQuery} setLoading={setLoading} />
+      {!loading ? <StyledGallery>
         {moviesList ? moviesList.map((val) => {
           return (<div key={val.id}><MovieCard movie={val} genres={genres} /></div>)
         }) : ''}
-      </StyledGallery>
+      </StyledGallery>: <p>Loading...</p>}
     </>
   )
 }

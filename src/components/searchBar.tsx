@@ -15,16 +15,18 @@ interface Props {
     setError: React.Dispatch<React.SetStateAction<any>>,
     setSearchQuery: React.Dispatch<React.SetStateAction<any>>,
     searchQuery: string,
+    setLoading: React.Dispatch<React.SetStateAction<any>>,
 }
 
 
-export default function SearchBar({ setMoviesList, setError, setSearchQuery, searchQuery }: Props) {
+export default function SearchBar({ setMoviesList, setError, setSearchQuery, searchQuery, setLoading }: Props) {
 
 
     useEffect(() => {
         const fetchData = async () => {
             if (searchQuery.length > 0) {
                 try {
+                    setLoading(true);
                     const res = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${searchQuery}&api_key=307988eac06dc5f8a31e00a98636b0d9`);
                     setMoviesList(res.data.results);
                 }
@@ -32,9 +34,11 @@ export default function SearchBar({ setMoviesList, setError, setSearchQuery, sea
                     //console.error(error);
                     setError(true);
                 }
+                finally {
+                    setLoading(false);
+                }
             }
         }
-        console.log('toto');
 
         fetchData();
     }, [searchQuery])

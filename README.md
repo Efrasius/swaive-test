@@ -10,19 +10,19 @@ Avant de commencer, assurez-vous d'avoir installé Node.js et npm sur votre mach
 
 Clonez ce dépôt sur votre machine locale :
 
-  git clone https://github.com/votre-utilisateur/votre-repo.git
+    git clone https://github.com/votre-utilisateur/votre-repo.git
 
 Accédez au répertoire du projet
 
 Installez les dépendances nécessaires avec npm :
 
-  npm install
+    npm install
 
 ## Lancement de l'application
 
 Pour lancer l'application en mode développement, utilisez la commande suivante :
 
-  npm run dev
+    npm run dev
 
 
 Cette commande va démarrer un serveur de développement et ouvrir votre application dans votre navigateur par défaut. Si ce n'est pas le cas, vous pouvez accéder à l'application en ouvrant http://localhost:5173 (par défaut) dans votre navigateur.
